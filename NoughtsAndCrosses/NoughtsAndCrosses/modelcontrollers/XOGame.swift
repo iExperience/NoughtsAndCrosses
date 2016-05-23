@@ -1,5 +1,5 @@
 //
-//  XOGameController.swift
+//  XOGame.swift
 //  NoughtsAndCrosses
 //
 //  Created by Julian Hulme on 2016/05/09.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum position : Int {
+enum position : Int {
     
     case TOP_LEFT
     case TOP_MIDDLE
@@ -19,9 +19,10 @@ public enum position : Int {
     case BOTTOM_LEFT
     case BOTTOM_MIDDLE
     case BOTTOM_RIGHT
+    
 }
 
-public enum type : String {
+enum type : String {
     
     case O = "O"
     case X = "X"
@@ -29,7 +30,8 @@ public enum type : String {
     
 }
 
-public enum OXGameState : String {
+enum OXGameState : String {
+    
     case inProgress
     case complete_no_one_won
     case complete_someone_won
@@ -100,12 +102,8 @@ class XOGame    {
     }
     
     func winDetection() -> Bool {
-        print(board)
         
-//        let xWon: Bool = false
-//        let oWon: Bool = false
-        
-        //for loop checking rows
+        //Check rows
         for i in 0...2 {
             if((board[3*i] == board[3*i + 1]) && (board[3*i] == board[3*i + 2]) && !(String(board[3*i]) == "EMPTY")){
                 print("Someone won at row i")
@@ -115,7 +113,7 @@ class XOGame    {
             }
         }
         
-        //forloop checking columns
+        //Check columns
         for j in 0...2 {
             if((board[j] == board[j + 3]) && (board[j] == board[j + 6]) && !(String(board[j]) == "EMPTY")){
                 print("Someone won at column j")
@@ -125,30 +123,17 @@ class XOGame    {
             }
         }
         
-        //Diagonals
+        //Check diagonals
         if((board[0] == board[4]) && (board[0] == board[8]) && !(String(board[0]) == "EMPTY")){
             print("Someone won at diagonal 1")
             return true
         }
-        
         if((board[2] == board[4]) && (board[2] == board[6]) && !(String(board[2]) == "EMPTY")){
             print("Someone won at diagonal 2")
             return true
         }
         
-        
-        print("winDetection, false")
         return false
-    }
-}
-
-
-//This class/stuff comes later
-class XOGameController  {
-    
-    
-    func newGame() -> XOGame  {
-        return XOGame()
     }
     
 }

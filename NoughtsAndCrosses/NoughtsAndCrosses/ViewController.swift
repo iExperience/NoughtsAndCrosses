@@ -9,26 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     
     @IBOutlet weak var boardView: UIView!
-    var game = XOGame()
+    var gameObject = XOGame()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func boardDidRotate(sender: UIRotationGestureRecognizer) {
         
-        print (sender.rotation)
-        
+//        print (sender.rotation)
         self.boardView.transform = CGAffineTransformMakeRotation(sender.rotation);
         
         //determine
@@ -38,26 +33,24 @@ class ViewController: UIViewController {
             })
         }
         
-    
     }
 
     @IBAction func boardWasTapped(sender: UIButton) {
         
         print("boardWasTapped")
         
-        
-        var state = game.state()
+        var state = gameObject.state()
         print (state)
         if (state == OXGameState.inProgress)   {
             //lets execute the move
             
-            let move = game.playMove(sender.tag)
+            let move = gameObject.playMove(sender.tag)
             
             if let moveToPrint = move   {
                 sender.setTitle("\(moveToPrint)", forState: UIControlState.Normal)
             }
             
-            state = game.state()
+            state = gameObject.state()
             
             if (state == OXGameState.complete_someone_won) {
 //                let winner = game.whosTurn()
@@ -67,17 +60,12 @@ class ViewController: UIViewController {
                 self.presentViewController(alert, animated: true, completion: nil)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {(action) in
                          self.restartGame()
-                        }
-                ))
+                }))
             }
 
-            
         }   else if (state == OXGameState.complete_someone_won)  {
-            
             print("Game ended")
         }
-        
-        
         
     }
     
@@ -87,14 +75,12 @@ class ViewController: UIViewController {
         
     }
     
-    //
     func restartGame()  {
         
         //reset model
-        game.reset()
+        gameObject.reset()
         //reset UI
         for view in boardView.subviews  {
-            
             if let button = view as? UIButton   {
                 button.setTitle("", forState: UIControlState.Normal)
             }
