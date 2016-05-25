@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set color of status bar to white
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,6 +63,13 @@ class ViewController: UIViewController {
                 self.presentViewController(alert, animated: true, completion: nil)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {(action) in
                          self.restartGame()
+                }))
+            } else if (state == OXGameState.complete_no_one_won) {
+                let message = "Game tied!"
+                let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                self.presentViewController(alert, animated: true, completion: nil)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {(action) in
+                    self.restartGame()
                 }))
             }
 

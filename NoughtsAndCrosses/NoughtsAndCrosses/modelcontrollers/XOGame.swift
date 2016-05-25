@@ -71,8 +71,10 @@ class XOGame    {
     //the current state of the game
     func state() -> OXGameState    {
         if (turn() < 3)   {
+            
             return OXGameState.inProgress
-        }   else if (turn() < 9)  {
+            
+        }   else {
             
             //check if someone won on this turn
             let win = winDetection()
@@ -80,12 +82,12 @@ class XOGame    {
             //if noone won, game is still in progress
             if (win)   {
                 return OXGameState.complete_someone_won
-            }   else    {
+            } else if (turn() == 9) {
+                return OXGameState.complete_no_one_won
+            } else    {
                 return OXGameState.inProgress
             }
             
-        }   else    {
-            return OXGameState.complete_no_one_won
         }
     }
     
