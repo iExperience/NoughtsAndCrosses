@@ -93,7 +93,7 @@ class XOGame    {
     
     //one of the later functions created in the demo
     //execute the move in the game
-    func playMove(position:Int) -> type? {
+    func playMove(position:Int) -> type! {
         board[position] = whosTurn()
         return board[position]
     }
